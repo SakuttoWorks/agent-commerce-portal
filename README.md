@@ -6,9 +6,9 @@ Project GHOST SHIP is a high-performance MCP (Model Context Protocol) gateway de
 
 ## 🤖 AI & Agent Discovery
 This site is optimized for AI agents. You can find the technical specifications at the following paths:
-- [/llms.txt](llms.txt): Overview for LLMs.
-- [/llms-full.txt](llms-full.txt): Deep technical specification.
-- [/mcp.json](mcp.json): MCP server definition.
+- [llms.txt](llms.txt): Overview for LLMs.
+- [llms-full.txt](llms-full.txt): Deep technical specification.
+- [mcp.json](mcp.json): MCP server definition.
 
 ## 🛠 Tech Stack
 - **Hosting**: GitHub Pages / Cloudflare
