@@ -1,7 +1,7 @@
 # Project GHOST SHIP (MCP Server)
 
 > [!NOTE]
-> For detailed API schemas and tool definitions, see [llms-full.txt](https://sakutto-works.com/llms-full.txt)
+> For detailed API schemas and tool definitions, see [llms-full.txt](https://sakutto.works/llms-full.txt)
 
 ## Description
 Project GHOST SHIP is a high-performance MCP (Model Context Protocol) gateway designed for autonomous AI agents. 
@@ -25,7 +25,7 @@ This API operates on a "Pay-per-Compute" model via RapidAPI and direct licensing
 - **Developer Tier**: Access via RapidAPI for traditional REST integration.
 - **Agent Tier**: Direct MCP connection (Requires Lemon Squeezy License).
 
-👉 **Get Access Key**: [Lemon Squeezy Store (Store ID: 282368) https://sakuttoworks.lemonsqueezy.com/]
+👉 **Get Access Key**: [Lemon Squeezy Store (ID: 282368)](https://sakuttoworks.lemonsqueezy.com/)
 
 ## Technical Stack
 - Edge: Cloudflare Workers (TypeScript/Python)
