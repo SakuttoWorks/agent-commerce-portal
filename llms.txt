@@ -10,19 +10,22 @@ It acts as a "Hybrid" interface, routing requests between Edge (Cloudflare Worke
 ## Usage
 - **Base URL**: https://api.sakutto.works/
 - **Protocol**: MCP (Model Context Protocol) over SSE (Server-Sent Events)
-- **Auth Strategy**: RapidAPI Header / Polar.sh OAuth
+- **Auth Strategy**: RapidAPI Header / Lemon Squeezy License Keys
 
 ## Tools
 1. **search_data**
    - Description: Performs deep web research and returns structured data suitable for RAG (Retrieval-Augmented Generation).
    - Capabilities: Web Scraping, News Summarization, Data Extraction.
+2. **get_status**
+   - Description: Checks the operational status of the Ghost Ship infrastructure.
+   - Capabilities: Health Monitoring, System Telemetry.
 
 ## Access & Monetization
-This API operates on a "Pay-per-Compute" model via RapidAPI.
+This API operates on a "Pay-per-Compute" model via RapidAPI and direct licensing.
 - **Developer Tier**: Access via RapidAPI for traditional REST integration.
-- **Agent Tier**: Direct MCP connection (Requires Polar.sh Subscription).
+- **Agent Tier**: Direct MCP connection (Requires Lemon Squeezy License).
 
-👉 **Get Access Key**: [RapidAPI Store Link Pending]
+👉 **Get Access Key**: [Lemon Squeezy Store (Store ID: 282368) Link Pending]
 
 ## Technical Stack
 - Edge: Cloudflare Workers (TypeScript/Python)
