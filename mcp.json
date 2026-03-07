@@ -1,7 +1,7 @@
 {
     "mcpVersion": "1.0.0",
     "name": "SakuttoWorks-Agent-Commerce-OS-Catalog",
-    "description": "The official MCP catalog for Sakutto Works Agent-Commerce-OS. Provides autonomous tools for deep research, status monitoring, and market analytics.",
+    "description": "The official MCP catalog for Sakutto Works Agent-Commerce-OS. Provides middleware tools for RAG pipeline integration, web data normalization, and system health monitoring.",
     "version": "1.0.0",
     "server": {
         "url": "https://api.sakutto.works/mcp/",
@@ -14,47 +14,51 @@
     },
     "tools": [
         {
-            "name": "search_data",
-            "description": "High-fidelity autonomous research tool. Performs deep web scraping and returns structured Markdown/JSON optimized for RAG. Powered by Agent-Commerce-Core.",
+            "name": "fetch_structured_content",
+            "description": "Core Normalization Tool. Retrieves content from specific topics or URLs and converts raw HTML into RAG-optimized Markdown/JSON. Removes web noise for LLM ingestion.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
-                    "query": {
+                    "target_topic": {
                         "type": "string",
-                        "description": "The specific research topic or complex query to investigate."
+                        "description": "The specific subject, URL, or technical query to normalize."
                     },
-                    "depth": {
+                    "format_mode": {
                         "type": "string",
-                        "enum": ["standard", "deep"],
-                        "description": "Research depth level. 'deep' includes extensive technical documentation analysis."
+                        "enum": ["concise", "comprehensive"],
+                        "description": "Data extraction density. 'comprehensive' includes full technical documentation scraping."
                     }
                 },
                 "required": [
-                    "query"
+                    "target_topic"
                 ]
             }
         },
         {
-            "name": "get_status",
-            "description": "Retrieves real-time operational status and latency metrics of the Agent-Commerce-OS infrastructure (Gateway and Core layers).",
+            "name": "get_system_status",
+            "description": "Retrieves real-time operational status, latency metrics, and API quota usage of the Agent-Commerce-OS infrastructure.",
             "inputSchema": {
                 "type": "object",
                 "properties": {}
             }
         },
         {
-            "name": "market_analytics",
-            "description": "Analyzes financial data and market trends via Agent-Commerce-Core. Provides structured insights for investment or business intelligence tasks.",
+            "name": "extract_domain_metadata",
+            "description": "Parses structured data (Schema.org, OpenGraph, Table Data) from domain-specific sources. Returns raw entity metrics without interpretation.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
-                    "symbol": {
+                    "entity_identifier": {
                         "type": "string",
-                        "description": "Stock symbol or market indicator to analyze."
+                        "description": "The unique identifier (e.g., Code, ID, Name) for the target entity to extract."
+                    },
+                    "source_filter": {
+                        "type": "string",
+                        "description": "Optional filter for specific data types (e.g., 'metadata', 'tables', 'headers')."
                     }
                 },
                 "required": [
-                    "symbol"
+                    "entity_identifier"
                 ]
             }
         }
