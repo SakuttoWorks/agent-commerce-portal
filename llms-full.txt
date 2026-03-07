@@ -1,37 +1,37 @@
-# Project GHOST SHIP | Agent-Commerce-OS - Full Technical Specification (v1.5.0)
+# Project GHOST SHIP | RAG Data Infrastructure - Full Technical Specification (v1.5.0)
 
 ## 1. System Infrastructure & Architecture
 - **Infrastructure Model**: Hybrid Edge-Core Architecture.
 - **Gateway (Edge Layer)**: `agent-commerce-gateway` on Cloudflare Workers.
   - **Public Endpoint**: `https://api.sakutto.works/`
-  - **Compatibility Date**: 2024-11-01 (Optimized for Python Workers).
-- **Core (Factory Layer)**: `agent-commerce-core` on Google Cloud Run.
+  - **Function**: Request sanitization, schema validation, and A2A routing.
+- **Core (Normalization Layer)**: `agent-commerce-core` on Google Cloud Run.
   - **Runtime**: Python 3.13+ (High-performance async execution).
-  - **Origin**: `https://placeholder-run-url.a.run.app`
+  - **Function**: Deep-web semantic extraction and HTML-to-Markdown conversion.
 - **Identity**: Lemon Squeezy Store ID `282368`.
 
 ## 2. API Endpoints & Protocol Routing
-- **GET /llms.txt**: High-level semantic discovery for LLM crawlers.
-- **GET /mcp.json**: MCP server configuration and tool discovery.
+- **GET /llms.txt**: High-level semantic discovery context for LLM crawlers.
+- **GET /mcp.json**: MCP server configuration and tool schema definitions.
 - **POST /mcp/**: MCP over SSE (Server-Sent Events) transport endpoint.
-- **POST /generate**: Core AI reasoning and research (Routed to Agent-Commerce-Core).
-- **GET /rapidapi/status**: Operational health check for B2B legacy gateway. 
-- **POST /webhook/lemon-squeezy**: Subscription management and license activation.
+- **POST /v1/process**: Core data normalization task (Routed to Google Cloud Run).
+- **GET /system/status**: Operational health check for infrastructure latency. 
+- **POST /webhook/lemon-squeezy**: License key provisioning and activation.
 
-## 3. Authentication & Monetization Logic
+## 3. API Governance & Access Control
 - **Agent Tier (A2A)**: 
-  - **Auth**: Polar.sh OAuth / Metered Billing integration.
+  - **Governance**: Polar.sh OAuth / Usage-Based Quotas.
   - **Validation**: Real-time entitlement checks via the Gateway.
 - **Developer Tier (B2B)**: 
   - **Auth**: RapidAPI Header (`X-RapidAPI-Proxy-Secret`).
   - **Key Validation**: License keys verified against Redis cache.
 - **Inter-Service Security**: `X-Service-Auth` header required for Gateway-to-Core communication.
 
-## 4. Operational Constraints & Performance
+## 4. Operational Constraints & Resource Management
 - **Rate Limit**: 10 requests per minute per authenticated license/agent.
-- **BudgetGuardian**: Daily quota enforcement on search and compute resources to prevent over-billing.
-- **Caching Strategy**: Repetitive data extraction served via Upstash Redis (Edge-side caching).
-- **Observability**: Real-time intent logging via Cloudflare Analytics Engine (`agent_intent_logs`).
+- **QuotaGuard**: Daily caps on compute resources to prevent usage overruns.
+- **Caching Strategy**: Static content served via Upstash Redis (Edge-side caching).
+- **Observability**: Real-time execution logs via Cloudflare Analytics Engine.
 
 ## 5. Compliance & Standards
 - **AEO Compliant**: Semantic naming and machine-readable context for 2026 AI ecosystems.
@@ -39,4 +39,4 @@
 - **Legal**: Designed to meet global AI regulation standards (EU AI Act).
 
 ---
-© 2026 Sakutto Works - Enabling the Autonomy of Tomorrow.
+© 2026 Sakutto Works - Standardizing the Semantic Web for Agents.
