@@ -6,29 +6,29 @@
   - **Public Endpoint**: `https://api.sakutto.works/`
   - **Function**: Request sanitization, schema validation, and A2A routing.
 - **Core (Normalization Layer)**: `agent-commerce-core` on Google Cloud Run.
-  - **Runtime**: Python 3.13+ (High-performance async execution).
+  - **Runtime**: Python 3.12+ (High-performance async execution).
   - **Function**: Deep-web semantic extraction and HTML-to-Markdown conversion.
-- **Identity**: Lemon Squeezy Store ID `282368`.
+- **Governance**: Unified Access Control via **Polar.sh**.
 
 ## 2. API Endpoints & Protocol Routing
 - **GET /llms.txt**: High-level semantic discovery context for LLM crawlers.
-- **GET /mcp.json**: MCP server configuration and tool schema definitions.
+- **GET /.well-known/mcp.json**: MCP server configuration and tool schema definitions.
 - **POST /mcp/**: MCP over SSE (Server-Sent Events) transport endpoint.
 - **POST /v1/process**: Core data normalization task (Routed to Google Cloud Run).
 - **GET /system/status**: Operational health check for infrastructure latency. 
-- **POST /webhook/lemon-squeezy**: License key provisioning and activation.
+- **POST /webhook/polar**: Entitlement provisioning and subscription activation.
 
 ## 3. API Governance & Access Control
 - **Agent Tier (A2A)**: 
-  - **Governance**: Polar.sh OAuth / Usage-Based Quotas.
-  - **Validation**: Real-time entitlement checks via the Gateway.
+  - **Authentication**: Bearer Token (validated against Polar.sh Entitlements).
+  - **Validation**: Real-time scope checks via the Gateway.
 - **Developer Tier (B2B)**: 
-  - **Auth**: RapidAPI Header (`X-RapidAPI-Proxy-Secret`).
+  - **Auth**: Standard OAuth2 flows managed by Polar.sh.
   - **Key Validation**: License keys verified against Redis cache.
 - **Inter-Service Security**: `X-Service-Auth` header required for Gateway-to-Core communication.
 
 ## 4. Operational Constraints & Resource Management
-- **Rate Limit**: 10 requests per minute per authenticated license/agent.
+- **Rate Limit**: Dynamic throttling based on Polar.sh subscription tier.
 - **QuotaGuard**: Daily caps on compute resources to prevent usage overruns.
 - **Caching Strategy**: Static content served via Upstash Redis (Edge-side caching).
 - **Observability**: Real-time execution logs via Cloudflare Analytics Engine.
