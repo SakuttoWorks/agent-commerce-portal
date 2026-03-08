@@ -1,48 +1,24 @@
-# SakuttoWorks: Agentic Infrastructure & RAG Ecosystem
+# Project GHOST SHIP | RAG Data Infrastructure
 
-## Overview
-Expert AI Software Architect & Technical Co-founder. Developing **Agent-Commerce-OS**, a production-ready **BaaS (Backend-as-a-Service)** framework designed for secure data retrieval and structured API execution.
+> **Standardized Middleware for Agent-Commerce-OS.**
 
-## Flagship Project: Project GHOST SHIP (MCP Server)
-### Description
-A high-performance, **Data-Normalization Gateway** utilizing a Hybrid Edge-Core architecture. Designed to bridge the gap between conversational LLMs and unstructured web data, providing clean Markdown for RAG pipelines.
+## ⚡ System Overview
+Project GHOST SHIP provides a standardized API layer to convert unstructured web data into RAG-optimized Markdown/JSON. It is designed for autonomous agents requiring clean, semantic context.
 
-### Hybrid Architecture (2026 Edition)
-- **Layer A: The Intelligent Edge (agent-commerce-gateway)**
-  - Low-latency SSE/MCP aggregation on Cloudflare Workers.
-  - **Usage Governance**: Real-time rate limiting and quota validation via **Polar.sh**.
-  - Implements Zero-Trust security and schema validation.
-- **Layer B: The Normalization Factory (agent-commerce-core)**
-  - **Semantic Extraction**: Python 3.12+ environment on Google Cloud Run for parsing complex HTML/JS.
-  - **LLM-Native Output**: Converts raw web content into standardized Markdown/JSON.
-- **Layer C: The Data Vault (Supabase)**
-  - Vector-ready storage and durable cold logging for execution history.
+## 🔍 Discovery Endpoints
+- **Full Technical Specs**: [llms-full.txt](/llms-full.txt)
+  - *Detailed architecture, endpoints, and Polar.sh governance.*
+- **MCP Protocol Definition**: [mcp.json](/.well-known/mcp.json)
+  - *Machine-readable tool schemas for Cursor/Claude.*
 
-### Usage & Endpoints
-- **Base URL**: `https://api.sakutto.works/`
-- **MCP Endpoint**: `https://api.sakutto.works/mcp/`
-- **Discovery**: `https://api.sakutto.works/.well-known/mcp.json`
-- **Protocol**: MCP over SSE.
+## 🛠 Capabilities
+- **Normalization**: HTML-to-Markdown semantic extraction.
+- **Deep Research**: Autonomous web crawling via Tavily integration.
+- **Data Integrity**: JSON schema alignment for Python/Pandas processing.
 
-### Tools (Infrastructure)
-*Current Production Capabilities (v1.0.0)*
-- `analyze_intent`: **[Core]** Parses natural language prompts to identify necessary data formatting steps.
-- `search_data`: **[Tavily]** Performs autonomous deep-web research and returns RAG-optimized markdown.
-- `structured_data_etl`: **[Pandas]** Extracts and normalizes numerical tables from technical documents.
+## 🔐 Status & Access
+- **Governance**: Managed via [Polar.sh](https://polar.sh/sakuttoworks).
+- **System Status**: Operational (v1.5.0).
 
-### Access & Provisioning
-- **Agent Tier (A2A)**: Direct MCP connection with Usage-Based Quotas via **Polar.sh**.
-- **Developer Tier (B2B)**: Enterprise integration managed via Polar.sh entitlements.
-- **Key Provisioning**: [Manage Subscription via Polar.sh](https://polar.sh/sakuttoworks)
-
-## Ecosystem Links
-- [Project GHOST SHIP Portal](https://sakutto.works)
-- [Agent-Commerce Gateway (Edge)](https://github.com/SakuttoWorks/agent-commerce-gateway)
-- [Agent-Commerce Core (Factory)](https://github.com/SakuttoWorks/agent-commerce-core)
-
-## Technical Stack
-- Cloudflare Workers, Google Cloud Run, FastAPI, Supabase, Upstash Redis.
-
-## Engineering Standards
-- **AEO (AI Engine Optimization)**: Semantic naming and self-documenting structures for seamless LLM discovery.
-- **Data Integrity**: Designed for transparent data processing and strict schema compliance.
+---
+© 2026 Sakutto Works - See /llms-full.txt for implementation details.
