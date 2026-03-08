@@ -8,7 +8,7 @@ Project GHOST SHIP provides a standardized API layer to convert unstructured web
 ## 🔍 Discovery Endpoints
 - **Full Technical Specs**: [llms-full.txt](/llms-full.txt)
   - *Detailed architecture, endpoints, and Polar.sh governance.*
-- **MCP Protocol Definition**: [mcp.json](/.well-known/mcp.json)
+- **MCP Protocol Definition**: [mcp.json](/mcp.json)
   - *Machine-readable tool schemas for Cursor/Claude.*
 
 ## 🛠 Capabilities
