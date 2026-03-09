@@ -16,3 +16,4 @@ This platform facilitates the ingestion of public web information into AI pipeli
 
 ## 4. Service Fees & Billing Policy
 Any fees charged through this portal are strictly for **technical resource consumption** (e.g., API bandwidth, compute time, storage). No portion of the fee is attributable to the sale of financial data, investment advice, or proprietary market analysis.
+
