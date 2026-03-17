@@ -30,10 +30,12 @@
         :root {
             --bg: #0a0a0c;
             --text: #e0e0e6;
-            --accent: #00f2ff; /* Cyan for Tech/Infra vibe */
+            --accent: #00f2ff;
             --secondary: #888891;
             --card-bg: #16161a;
             --border: #222;
+            --success: #00ff88;
+            --error: #ff3366;
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -52,26 +54,41 @@
             padding: 40px 20px;
             text-align: center;
         }
+        
+        /* Dynamic Status Badge */
         .status-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 242, 255, 0.05);
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            color: var(--accent);
+            background: rgba(136, 136, 145, 0.1);
+            border: 1px solid rgba(136, 136, 145, 0.2);
+            color: var(--secondary);
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 24px;
             letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .status-badge.operational {
+            background: rgba(0, 255, 136, 0.05);
+            border-color: rgba(0, 255, 136, 0.2);
+            color: var(--success);
+        }
+        .status-badge.degraded {
+            background: rgba(255, 51, 102, 0.05);
+            border-color: rgba(255, 51, 102, 0.2);
+            color: var(--error);
         }
         .status-dot {
             width: 8px;
             height: 8px;
-            background-color: var(--accent);
+            background-color: currentColor;
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent);
+            box-shadow: 0 0 8px currentColor;
+        }
+        .status-badge.operational .status-dot {
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
@@ -79,6 +96,7 @@
             50% { opacity: 0.5; }
             100% { opacity: 1; }
         }
+
         h1 {
             font-size: 3rem;
             margin: 0 0 16px;
@@ -109,6 +127,9 @@
             text-decoration: none;
             transition: all 0.2s ease;
             font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .btn-primary {
             background-color: var(--accent);
@@ -129,6 +150,16 @@
             border-color: var(--text);
             background: rgba(255,255,255,0.05);
         }
+        .btn-highlight {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            background: rgba(0, 242, 255, 0.05);
+        }
+        .btn-highlight:hover {
+            background: rgba(0, 242, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
         .ai-discovery {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -187,8 +218,8 @@
 </head>
 <body>
     <div class="container">
-        <div class="status-badge">
-            <span class="status-dot"></span> System Operational
+        <div id="system-status" class="status-badge">
+            <span class="status-dot"></span> Checking Status...
         </div>
         
         <h1>Project GHOST SHIP</h1>
@@ -199,15 +230,16 @@
         
         <div class="cta-group">
             <a href="https://polar.sh/sakuttoworks" class="btn btn-primary">Get API Access</a>
+            <a href="/llms.txt" class="btn btn-highlight">🤖 View Agent Context (llms.txt)</a>
             <a href="https://github.com/SakuttoWorks/agent-commerce-gateway" class="btn btn-outline">View Source</a>
         </div>
 
         <div class="ai-discovery">
-            <h2>🤖 AEO (AI Engine Optimization) Endpoints</h2>
+            <h2>Endpoint Directory</h2>
             <div class="links">
-                <a href="/llms.txt">llms.txt <span style="color:var(--secondary)">(Context Optimization)</span></a>
                 <a href="/llms-full.txt">llms-full.txt <span style="color:var(--secondary)">(Tech Specs)</span></a>
                 <a href="/mcp.json">mcp.json <span style="color:var(--secondary)">(Protocol Definition)</span></a>
+                <a href="/docs" target="_blank">/docs <span style="color:var(--secondary)">(Interactive API Docs)</span></a>
             </div>
         </div>
 
@@ -216,5 +248,26 @@
             <div class="legal-note">Technical Infrastructure Only. Pure Data Normalization.</div>
         </footer>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const badge = document.getElementById('system-status');
+            try {
+                // Pointing to your designated status endpoint
+                const response = await fetch('/rapidapi/status', { method: 'GET', cache: 'no-store' });
+                if (response.ok) {
+                    badge.className = 'status-badge operational';
+                    badge.innerHTML = '<span class="status-dot"></span> System Operational';
+                } else {
+                    throw new Error('Degraded Performance');
+                }
+            } catch (error) {
+                // Fallback UI if endpoint fails or doesn't exist yet
+                badge.className = 'status-badge degraded';
+                badge.innerHTML = '<span class="status-dot"></span> Degraded Performance';
+                console.warn('Status check failed:', error);
+            }
+        });
+    </script>
 </body>
 </html>
