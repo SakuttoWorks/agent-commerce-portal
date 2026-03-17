@@ -7,8 +7,8 @@
     
     <meta name="description" content="Project GHOST SHIP: High-performance MCP Gateway for RAG pipelines. Normalizing unstructured web data into semantic Markdown for AI agents.">
     
-    <link rel="alternate" type="text/all-knowing-ai" title="LLM Discovery" href="/llms.txt">
-    <link rel="alternate" type="application/json+mcp" title="MCP Catalog" href="/mcp.json">
+    <link rel="alternate" type="text/all-knowing-ai" title="LLM Discovery" href="https://api.sakutto.works/llms.txt">
+    <link rel="alternate" type="application/json+mcp" title="MCP Catalog" href="https://api.sakutto.works/mcp.json">
 
     <script type="application/ld+json">
     {
@@ -219,7 +219,7 @@
 <body>
     <div class="container">
         <div id="system-status" class="status-badge">
-            <span class="status-dot"></span> Checking Status...
+            <span class="status-dot"></span> Checking Gateway Status...
         </div>
         
         <h1>Project GHOST SHIP</h1>
@@ -230,16 +230,16 @@
         
         <div class="cta-group">
             <a href="https://polar.sh/sakuttoworks" class="btn btn-primary">Get API Access</a>
-            <a href="/llms.txt" class="btn btn-highlight">🤖 View Agent Context (llms.txt)</a>
+            <a href="https://api.sakutto.works/llms.txt" class="btn btn-highlight">🤖 View Agent Context (llms.txt)</a>
             <a href="https://github.com/SakuttoWorks/agent-commerce-gateway" class="btn btn-outline">View Source</a>
         </div>
 
         <div class="ai-discovery">
             <h2>Endpoint Directory</h2>
             <div class="links">
-                <a href="/llms-full.txt">llms-full.txt <span style="color:var(--secondary)">(Tech Specs)</span></a>
-                <a href="/mcp.json">mcp.json <span style="color:var(--secondary)">(Protocol Definition)</span></a>
-                <a href="/docs" target="_blank">/docs <span style="color:var(--secondary)">(Interactive API Docs)</span></a>
+                <a href="https://api.sakutto.works/llms-full.txt">llms-full.txt <span style="color:var(--secondary)">(Tech Specs)</span></a>
+                <a href="https://api.sakutto.works/mcp.json">mcp.json <span style="color:var(--secondary)">(Protocol Definition)</span></a>
+                <a href="https://api.sakutto.works/docs" target="_blank">/docs <span style="color:var(--secondary)">(Interactive API Docs)</span></a>
             </div>
         </div>
 
@@ -253,18 +253,17 @@
         document.addEventListener('DOMContentLoaded', async () => {
             const badge = document.getElementById('system-status');
             try {
-                // Pointing to your designated status endpoint
-                const response = await fetch('/rapidapi/status', { method: 'GET', cache: 'no-store' });
+                // 修正: Gateway(api.sakutto.works) が生きているか直接確認する
+                const response = await fetch('https://api.sakutto.works/llms.txt', { method: 'GET', cache: 'no-store' });
                 if (response.ok) {
                     badge.className = 'status-badge operational';
-                    badge.innerHTML = '<span class="status-dot"></span> System Operational';
+                    badge.innerHTML = '<span class="status-dot"></span> Gateway Operational';
                 } else {
-                    throw new Error('Degraded Performance');
+                    throw new Error('Gateway Degraded');
                 }
             } catch (error) {
-                // Fallback UI if endpoint fails or doesn't exist yet
                 badge.className = 'status-badge degraded';
-                badge.innerHTML = '<span class="status-dot"></span> Degraded Performance';
+                badge.innerHTML = '<span class="status-dot"></span> Gateway Unavailable';
                 console.warn('Status check failed:', error);
             }
         });
