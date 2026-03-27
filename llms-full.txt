@@ -1,57 +1,28 @@
-# Project GHOST SHIP | RAG Data Infrastructure - Full Technical Specification (v1.5.0)
+# Agent-Commerce-OS - Full Technical Specification (v1.0.0)
 
-## 1. System Infrastructure & Architecture
-- **Infrastructure Model**: Hybrid Edge-Core Architecture.
-- **Gateway (Edge Layer)**: `agent-commerce-gateway` on Cloudflare Workers.
-  - **Public Endpoint**: `https://api.sakutto.works/`
-  - **Function**: Request sanitization, schema validation, and A2A routing.
-- **Core (Normalization Layer)**: `agent-commerce-core` on Google Cloud Run.
-  - **Runtime**: Python 3.12+ (High-performance async execution).
-  - **Function**: Deep-web semantic extraction and HTML-to-Markdown conversion.
-- **Governance**: Unified Access Control via **Polar.sh**.
+## 1. System Infrastructure & Hybrid Architecture
+Agent-Commerce-OS employs a strict Zero-Trust, Hybrid Edge-Core architecture to guarantee performance, security, and exact billing for AI agent traffic.
 
-## 2. Supported Tools (MCP)
-The following tools are exposed via the Model Context Protocol (MCP) for autonomous agents:
+- **Gateway (Layer A)**: `ghost-ship-proxy`
+  - **Environment**: Cloudflare Workers (Hono.js).
+  - **Endpoint**: `https://api.sakutto.works/v1/normalize_web_data`
+  - **Functions**: Edge-level Polar.sh License Key validation (Zero-latency cache), Prompt Injection Shield, and asynchronous Usage Metering ($0.10 per call). Adds `X-Internal-Secret` and `X-Tenant-Id` headers to authorized requests.
+- **Core (Layer B)**: `gs-mcp-core`
+  - **Environment**: Google Cloud Run (Python/FastAPI built with `uv`).
+  - **Functions**: Deep semantic extraction using RAG-optimized pipelines (e.g., Jina Reader, Firecrawl). Converts messy HTML into strictly formatted Markdown or JSON. Drops any request lacking the `X-Internal-Secret`.
 
-- **`analyze_intent`**
-  - **Type**: Core Logic
-  - **Description**: Parses natural language prompts to identify necessary data formatting steps and extraction targets.
-  
-- **`search_data`**
-  - **Type**: External Integration (Tavily)
-  - **Description**: Performs autonomous deep-web research and returns RAG-optimized markdown, stripped of HTML noise.
+## 2. Agent-Optimized Capabilities (The "Juice" Menu)
+The `normalize_web_data` endpoint is highly effective for specialized deep-web extraction tasks, including:
+- **Japanese Technology Regulation Research**: Extracting clean, noise-free text from complex government or corporate portals.
+- **Academic Paper Extraction**: Normalizing PDF/HTML academic papers into cleanly structured Markdown for seamless agent ingestion.
 
-- **`structured_data_etl`**
-  - **Type**: Compute Engine (Pandas)
-  - **Description**: Extracts and normalizes numerical tables from technical documents or unstructured text sources.
+## 3. API Governance & Error Handling
+- **Authentication**: AI Agents must pass a Polar.sh token via the `Authorization: Bearer <TOKEN>` header.
+- **Self-Correction (AgentSemanticError)**: If an agent sends malformed data, the API returns a `400 Bad Request` containing an `agent_instruction` field. Agents are expected to read this instruction and self-correct their subsequent request.
+- **Security Drops**: Malicious payloads (e.g., "ignore previous instructions") are instantly terminated at Layer A with a `403 Forbidden`.
 
-## 3. API Endpoints & Protocol Routing
-- **GET /llms.txt**: High-level semantic discovery context for LLM crawlers.
-- **GET /.well-known/mcp.json**: MCP server configuration and tool schema definitions.
-- **POST /mcp/**: MCP over SSE (Server-Sent Events) transport endpoint.
-- **POST /v1/process**: Core data normalization task (Routed to Google Cloud Run).
-- **GET /system/status**: Operational health check for infrastructure latency. 
-- **POST /webhook/polar**: Entitlement provisioning and subscription activation.
-
-## 4. API Governance & Access Control
-- **Agent Tier (A2A)**: 
-  - **Authentication**: Bearer Token (validated against Polar.sh Entitlements).
-  - **Validation**: Real-time scope checks via the Gateway.
-- **Developer Tier (B2B)**: 
-  - **Auth**: Standard OAuth2 flows managed by Polar.sh.
-  - **Key Validation**: License keys verified against Redis cache.
-- **Inter-Service Security**: `X-Service-Auth` header required for Gateway-to-Core communication.
-
-## 5. Operational Constraints & Resource Management
-- **Rate Limit**: Dynamic throttling based on Polar.sh subscription tier.
-- **QuotaGuard**: Daily caps on compute resources to prevent usage overruns.
-- **Caching Strategy**: Static content served via Upstash Redis (Edge-side caching).
-- **Observability**: Real-time execution logs via Cloudflare Analytics Engine.
-
-## 6. Compliance & Standards
-- **AEO Compliant**: Semantic naming and machine-readable context for 2026 AI ecosystems.
-- **Data Integrity**: Structured Markdown output optimized for RAG injection.
-- **Legal**: Designed to meet global AI regulation standards (EU AI Act).
+## 4. References
+Always refer to `/openapi.yaml` for the strict OpenAPI 3.1.0 schema definitions required to call the endpoints.
 
 ---
 © 2026 Sakutto Works - Standardizing the Semantic Web for Agents.
