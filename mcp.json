@@ -1,73 +1,42 @@
 {
   "mcpVersion": "1.0.0",
-  "name": "SakuttoWorks-Agent-Commerce-OS-Catalog",
-  "description": "The official MCP catalog for Sakutto Works Agent-Commerce-OS. Provides middleware tools for RAG pipeline integration and web data normalization.",
+  "name": "Agent-Commerce-OS-Catalog",
+  "description": "The official MCP catalog for Sakutto Works. Provides zero-trust web data normalization tools for RAG pipelines.",
   "version": "1.0.0",
   "server": {
-    "type": "http-proxy",
-    "url": "https://api.sakutto.works",
-    "endpoints": {
-        "list_tools": "/api/v1/tools/list",
-        "call_tool": "/api/v1/tools/call"
-    }
+    "type": "rest",
+    "url": "https://api.sakutto.works/v1"
   },
   "authentication": {
     "type": "api-key",
     "header": "Authorization",
     "scheme": "Bearer",
-    "instruction": "Obtain quota entitlement from https://polar.sh/sakuttoworks"
+    "instruction": "Obtain your API Key from https://polar.sh/sakuttoworks. Billed at $0.10 per successful normalization."
   },
   "tools": [
     {
-      "name": "analyze_intent",
-      "description": "[Core] Parses natural language prompts to identify necessary data formatting steps.",
+      "name": "normalize_web_data",
+      "description": "Extracts and normalizes unstructured web content (e.g., Japanese tech regulation sites, academic papers) into clean, agent-readable Markdown or JSON. Strips HTML noise and optimizes for RAG.",
       "inputSchema": {
         "type": "object",
         "properties": {
-          "prompt": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "prompt"
-        ]
-      }
-    },
-    {
-      "name": "search_data",
-      "description": "[Tavily] Performs autonomous deep-web research and returns RAG-optimized markdown.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "type": "string"
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The target URL to extract data from."
           },
-          "depth": {
+          "format_type": {
             "type": "string",
             "enum": [
-              "standard",
-              "deep"
-            ]
+              "markdown",
+              "json"
+            ],
+            "default": "markdown",
+            "description": "The desired output format."
           }
         },
         "required": [
-          "query"
-        ]
-      }
-    },
-    {
-      "name": "structured_data_etl",
-      "description": "[Pandas] Extracts and normalizes numerical tables via Agent-Commerce-Core.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "dataset_identifier": {
-            "type": "string",
-            "description": "The target identifier for the data set to process."
-          }
-        },
-        "required": [
-          "dataset_identifier"
+          "url"
         ]
       }
     }
