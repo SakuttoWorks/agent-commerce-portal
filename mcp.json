@@ -11,7 +11,7 @@
     "type": "api-key",
     "header": "Authorization",
     "scheme": "Bearer",
-    "instruction": "Obtain your API Key from https://polar.sh/sakuttoworks. Billed at $0.10 per successful normalization."
+    "instruction": "Obtain your API Key from https://polar.sh/checkout/polar_c_vhQCEGbcqHSh83ubpIqGTQBFTlkDxFzdz1tYX0pvZuy. Billed at $0.10 per successful normalization."
   },
   "tools": [
     {
