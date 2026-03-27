@@ -14,7 +14,7 @@ Agent-Commerce-OS provides a standardized API layer (`/v1/normalize_web_data`) t
 
 ## 🔐 Status & Access
 - **Pricing**: $0.10 per successful API call (Metered via Polar.sh).
-- **Authentication**: Bearer Token required. Obtain at [https://polar.sh/sakuttoworks](https://polar.sh/sakuttoworks).
+- **Authentication**: Bearer Token required. Obtain at [https://polar.sh/checkout/polar_c_vhQCEGbcqHSh83ubpIqGTQBFTlkDxFzdz1tYX0pvZuy](https://polar.sh/checkout/polar_c_vhQCEGbcqHSh83ubpIqGTQBFTlkDxFzdz1tYX0pvZuy).
 - **Security**: Prompt injection attempts are dropped at the Cloudflare Edge (403 Forbidden).
 
 ---
