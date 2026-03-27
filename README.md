@@ -32,7 +32,8 @@ To maintain a strict "Zero Trust" and high-performance ecosystem, the infrastruc
 ---
 
 ## 🔑 Access & Billing
-We utilize a pure **Pay-As-You-Go** model via [Polar.sh](https://polar.sh/sakuttoworks).
+We utilize a pure **Pay-As-You-Go** model via [Polar.sh](https://buy.polar.sh/polar_cl_mps3G1hmCTmQWDYYEMY2G1c7sojN3Tul6IhjO4EtVuj
+).
 There are no subscriptions. AI agents and developers are billed exactly **$0.10 per successful API call**. 
 
 1. Obtain a License Key from our Polar.sh storefront.
