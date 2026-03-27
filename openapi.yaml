@@ -1,0 +1,74 @@
+openapi: 3.1.0
+info:
+  title: Agent-Commerce-OS API
+  description: Zero-trust, RAG-optimized data normalization API for AI agents. Converts unstructured web data into semantic Markdown or JSON.
+  version: 1.0.0
+servers:
+  - url: https://api.sakutto.works/v1
+    description: Production Gateway (Cloudflare Edge)
+paths:
+  /normalize_web_data:
+    post:
+      summary: Normalize web content for LLMs
+      description: Extracts and normalizes content from a given URL into a clean, agent-readable format. Billed via Polar.sh ($0.10 per call).
+      operationId: normalizeWebData
+      security:
+        - polarBearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  description: The target URL to extract and normalize.
+                format_type:
+                  type: string
+                  enum: [markdown, json]
+                  default: markdown
+                  description: The desired output format.
+      responses:
+        '200':
+          description: Successfully normalized data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    description: The normalized content.
+                  source_url:
+                    type: string
+        '400':
+          description: Semantic Error (Agent should self-correct based on agent_instruction)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentSemanticError'
+        '403':
+          description: Forbidden - Invalid Polar.sh License Key or Prompt Injection detected at the Edge.
+        '422':
+          description: Validation Error for the request body.
+components:
+  securitySchemes:
+    polarBearerAuth:
+      type: http
+      scheme: bearer
+      description: Polar.sh License Key. Add as 'Authorization: Bearer <YOUR_LICENSE_KEY>'.
+  schemas:
+    AgentSemanticError:
+      type: object
+      properties:
+        error_type:
+          type: string
+        message:
+          type: string
+        agent_instruction:
+          type: string
+          description: Actionable instruction for the AI agent to recover from the error.
