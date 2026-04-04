@@ -1,0 +1,44 @@
+{
+    "mcpVersion": "2025-11-25",
+    "name": "Agent-Commerce-OS-Catalog",
+    "description": "The official MCP catalog for Sakutto Works. Provides zero-trust web data normalization tools for RAG pipelines.",
+    "version": "1.0.0",
+    "server": {
+        "type": "rest",
+        "url": "https://api.sakutto.works/v1"
+    },
+    "authentication": {
+        "type": "api-key",
+        "header": "Authorization",
+        "scheme": "Bearer",
+        "instruction": "Obtain your API Key from https://buy.polar.sh/polar_cl_mps3G1hmCTmQWDYYEMY2G1c7sojN3Tul6IhjO4EtVuj. Billed at $0.10 per successful normalization."
+    },
+    "tools": [
+        {
+            "name": "normalize_web_data",
+            "description": "Extracts and normalizes unstructured web content (e.g., Japanese tech regulation sites, academic papers) into clean, agent-readable Markdown or JSON. Strips HTML noise and optimizes for RAG.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The target URL to extract data from."
+                    },
+                    "format_type": {
+                        "type": "string",
+                        "enum": [
+                            "markdown",
+                            "json"
+                        ],
+                        "default": "markdown",
+                        "description": "The desired output format."
+                    }
+                },
+                "required": [
+                    "url"
+                ]
+            }
+        }
+    ]
+}
