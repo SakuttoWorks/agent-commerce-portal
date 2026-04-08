@@ -18,6 +18,15 @@ This repository ([`agent-commerce-portal`](https://github.com/SakuttoWorks/agent
 
 ---
 
+## ✨ Key Features
+
+* 🛡️ **Zero-Trust Edge Security:** Strict prompt injection shielding and perimeter defense at the Cloudflare Edge.
+* 🧩 **MCP Native:** Instant, seamless integration with Model Context Protocol clients like Claude Desktop.
+* ⚡ **Lite GraphQL Filtering:** Pass an optional `fields` array to extract only the exact data nodes your agent needs, drastically minimizing context window token consumption.
+* 💳 **Pure Pay-As-You-Go:** $0.10 per successful call powered by Polar.sh. No hidden fees, no forced subscriptions.
+
+---
+
 ## 🤖 AI Discovery (AEO Ready)
 
 This hub is fully architected for **Agent Engine Optimization (AEO)**. LLMs and autonomous agents can natively ingest our specifications through the following machine-readable endpoints:
