@@ -74,6 +74,17 @@ python -m http.server 8000
 npx serve .
 ```
 
+Testing:
+This project uses [Playwright](https://playwright.dev/) to ensure UI stability and API schema integrity. To run the test suite locally:
+
+```bash
+# Install dependencies
+npm install
+
+# Run the full test suite
+npm test
+```
+
 We welcome contributions from the global community! To contribute, please follow these standard steps:
 
 1. Fork the repository.
