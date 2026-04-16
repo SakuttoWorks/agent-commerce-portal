@@ -64,6 +64,10 @@ No hidden fees, no forced subscriptions. Developers and AI agents are billed exa
 
 ## 🛠 Local Setup & Contributing
 
+**Prerequisites:**
+- **Node.js** (v18 or higher) and npm installed.
+- **Python 3.10+** (optional, for alternative local server).
+
 To test this portal documentation (Discovery Hub) locally, simply serve the directory using any static HTTP server. You can use Python or Node.js depending on your environment:
 
 ```bash
