@@ -1,32 +1,32 @@
 # Agent-Commerce-OS - Full Technical Specification (v1.0.0)
 
 ## 1. System Infrastructure & Hybrid Architecture
-Agent-Commerce-OS employs a strict Zero-Trust, Hybrid Edge-Core architecture to guarantee performance, security, and exact billing for AI agent traffic.
+Agent-Commerce-OS employs a strict Zero-Trust, Hybrid Edge-Core architecture to guarantee enterprise-grade performance, security, and exact billing for AI agent traffic.
 
 - **Gateway (Layer A)**: `agent-commerce-gateway`
-  - **Environment**: Cloudflare Workers (Hono.js).
-  - **Endpoint**: `https://api.sakutto.works/v1/normalize_web_data`
-  - **Functions**: Edge-level Polar.sh License Key validation (Zero-latency cache), Prompt Injection Shield, and asynchronous Usage Metering ($0.10 per call). Adds `X-Internal-Secret` and `X-Tenant-Id` headers to authorized requests.
+  - **Environment**: Cloudflare Workers (https://api.sakutto.works)
+  - **Functions**: Edge-level Polar.sh License Key validation, Prompt Injection Shield, dynamic rate limiting, and asynchronous Usage Metering ($0.10 per call).
 - **Core (Layer B)**: `agent-commerce-core`
-  - **Environment**: Google Cloud Run (Python/FastAPI built with `uv`).
-  - **Endpoint**: `[Internal Private Network - Direct Access Prohibited]` 
-  - **Functions**: Deep semantic extraction using RAG-optimized pipelines (e.g., Jina Reader, Firecrawl). Converts messy HTML into strictly formatted Markdown or JSON. Drops any request lacking the `X-Internal-Secret`.
+  - **Environment**: Google Cloud Run (https://agent-commerce-core-xd36uwybpa-an.a.run.app)
+  - **Functions**: Deep semantic extraction using RAG-optimized pipelines. *Note: Direct access is restricted via Layer A Zero-Trust policies.*
 - **Client (Layer C)**: `ghost-ship-mcp-server`
-  - **Environment**: Model Context Protocol (MCP) Server.
-  - **Functions**: Provides the standardized tools and connection interfaces for autonomous AI agents to securely interact with the Gateway API.
+  - **Environment**: Model Context Protocol (MCP) Server for local agent bridging.
 
-## 2. Agent-Optimized Capabilities (The "Juice" Menu)
-The `normalize_web_data` endpoint is highly effective for specialized deep-web extraction tasks, including:
-- **Japanese Technology Regulation Research**: Extracting clean, noise-free text from complex government or corporate portals.
-- **Academic Paper Extraction**: Normalizing PDF/HTML academic papers into cleanly structured Markdown for seamless agent ingestion.
+## 2. Enterprise Audit & Observability
+- **Trace ID**: Every request generates a unique distributed Trace ID that propagates from Layer A to Layer C.
+- **Data Provenance**: All successful extractions include metadata (source URLs, absolute timestamps) to ensure agents ground responses in verified facts.
 
-## 3. API Governance & Error Handling
-- **Authentication**: AI Agents must pass a Polar.sh token via the `Authorization: Bearer <TOKEN>` header.
-- **Self-Correction (AgentSemanticError)**: If an agent sends malformed data, the API returns a `400 Bad Request` containing an `agent_instruction` field. Agents are expected to read this instruction and self-correct their subsequent request.
-- **Security Drops**: Malicious payloads (e.g., "ignore previous instructions") are instantly terminated at Layer A with a `403 Forbidden`.
+## 3. Reference URLs & Repositories
+- **GitHub Profile**: [SakuttoWorks GitHub](https://github.com/SakuttoWorks)
+- **Layer A Repo**: [agent-commerce-gateway](https://github.com/SakuttoWorks/agent-commerce-gateway)
+- **Layer B Repo**: [agent-commerce-core](https://github.com/SakuttoWorks/agent-commerce-core)
+- **Layer C Repo**: [ghost-ship-mcp-server](https://github.com/SakuttoWorks/ghost-ship-mcp-server)
+- **Portal Repo**: [agent-commerce-portal](https://github.com/SakuttoWorks/agent-commerce-portal)
 
-## 4. References
-Always refer to `/openapi.yaml` for the strict OpenAPI 3.1.0 schema definitions required to call the endpoints.
+## 4. Support the Creator
+Building an enterprise-grade OS for agents takes massive effort. If you or your agents rely on this infrastructure:
+- **Tip**: [One-time Tip on Polar.sh](https://buy.polar.sh/polar_cl_ZI9H5fL8dQqcormOadiGDFDpS2Sxd1jT05jTX1vStWi)
+- **Sponsor**: [Become a GitHub Sponsor](https://github.com/sponsors/SakuttoWorks)
 
 ---
 © 2026 Sakutto Works - Standardizing the Semantic Web for Agents.
