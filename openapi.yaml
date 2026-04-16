@@ -1,13 +1,11 @@
-# ghost-ship-portal/openapi.yaml
 openapi: 3.1.0
 info:
   title: Agent-Commerce-OS API
-  description: Zero-trust, RAG-optimized data normalization API for AI agents. Converts unstructured web data into semantic Markdown or JSON.
+  description: Enterprise-grade, Zero-trust data normalization API for autonomous AI agents. Converts unstructured web data into semantic Markdown or JSON, featuring hallucination countermeasures, Trace ID auditability, and self-correcting error handling. Support the project at [GitHub Sponsors](https://github.com/sponsors/SakuttoWorks)
   version: 1.0.0
   contact:
     name: Sakutto Works
     url: https://sakutto.works
-    email: sakutto.works@gmail.com
 servers:
   - url: https://api.sakutto.works/v1
     description: Production Gateway (Cloudflare Edge)
@@ -22,7 +20,6 @@ paths:
       tags:
         - System
       summary: CORS Preflight & Status Check
-      description: Used by the portal for edge status checks and CORS preflight.
       operationId: checkStatus
       responses:
         "200":
@@ -33,7 +30,7 @@ paths:
       tags:
         - Data Normalization
       summary: Normalize web content for LLMs
-      description: Extracts and normalizes content from a given URL into a clean, agent-readable format. Billed via Polar.sh ($0.10 per call).
+      description: Extracts and normalizes content from a given URL. First 100 requests/month are FREE. Subsequent calls are billed via Polar.sh ($0.10 per call).
       operationId: normalizeWebData
       security:
         - polarBearerAuth: []
@@ -49,20 +46,17 @@ paths:
                 url:
                   type: string
                   format: uri
-                  description: The target URL to extract and normalize.
                 format_type:
                   type: string
                   enum: [markdown, json]
                   default: markdown
-                  description: The desired output format.
                 fields:
                   type: array
                   items:
                     type: string
-                  description: Optional Lite GraphQL-style field selection to minimize token consumption.
       responses:
         "200":
-          description: Successfully normalized data.
+          description: Successfully normalized data with audit metadata.
           content:
             application/json:
               schema:
@@ -70,25 +64,26 @@ paths:
                 properties:
                   data:
                     type: string
-                    description: The normalized content.
                   source_url:
                     type: string
+                  trace_id:
+                    type: string
         "400":
-          description: Semantic Error (Agent should self-correct based on agent_instruction)
+          description: Semantic Error (Agent should self-correct)
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/AgentSemanticError"
         "403":
-          description: Forbidden - Invalid Polar.sh License Key or Prompt Injection detected at the Edge.
+          description: Forbidden - Invalid Key or Prompt Injection.
         "422":
-          description: Validation Error for the request body.
+          description: Validation Error.
 components:
   securitySchemes:
     polarBearerAuth:
       type: http
       scheme: bearer
-      description: "Polar.sh License Key. Add as 'Authorization: Bearer <YOUR_LICENSE_KEY>'."
+      description: "Polar.sh License Key required. [Get API Key here](https://buy.polar.sh/polar_cl_mps3G1hmCTmQWDYYEMY2G1c7sojN3Tul6IhjO4EtVuj)"
   schemas:
     AgentSemanticError:
       type: object
@@ -99,4 +94,5 @@ components:
           type: string
         agent_instruction:
           type: string
-          description: Actionable instruction for the AI agent to recover from the error.
+        trace_id:
+          type: string
