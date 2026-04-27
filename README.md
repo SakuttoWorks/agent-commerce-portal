@@ -1,8 +1,13 @@
 # Agent-Commerce-OS 🚢
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](License)
-[![Support via Polar.sh](https://img.shields.io/badge/Support_via-Polar.sh-blue)](https://buy.polar.sh/polar_cl_ZI9H5fL8dQqcormOadiGDFDpS2Sxd1jT05jTX1vStWi)
-[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?logo=github)](https://github.com/sponsors/SakuttoWorks)
+[![Official Portal](https://img.shields.io/badge/Official_Portal-sakutto.works-000000?style=for-the-badge)](https://sakutto.works)
+[![ghost-ship-mcp-server MCP server](https://glama.ai/mcp/servers/SakuttoWorks/ghost-ship-mcp-server/badges/score.svg)](https://glama.ai/mcp/servers/SakuttoWorks/ghost-ship-mcp-server)
+[![Available on RapidAPI](https://img.shields.io/badge/Available_on-RapidAPI-005571?style=for-the-badge&logo=rapid)](https://rapidapi.com/SakuttoWorks/api/agent-commerce-os)
+[![Tip via Polar.sh](https://img.shields.io/badge/Tip_via-Polar.sh-blue?style=for-the-badge)](https://buy.polar.sh/polar_cl_ZI9H5fL8dQqcormOadiGDFDpS2Sxd1jT05jTX1vStWi)
+[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?style=for-the-badge&logo=github)](https://github.com/sponsors/SakuttoWorks)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](License)
+
+---
 
 **The official documentation hub and discovery layer for the [Sakutto Works](https://github.com/SakuttoWorks) AI Data Infrastructure.**
 
